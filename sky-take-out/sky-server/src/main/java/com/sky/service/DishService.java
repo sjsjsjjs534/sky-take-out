@@ -6,6 +6,8 @@ import com.sky.entity.Dish;
 import com.sky.result.PageResult;
 import com.sky.vo.DishVO;
 
+import java.util.List;
+
 /**
  * @BelongsProject: sky-take-out
  * @Author: 张宇若
@@ -44,4 +46,10 @@ public interface DishService {
     * 更新起售或者停售
     * */
     void updateStatus(DishDTO dishDTO);
+
+    /*
+    * 根据分类查询菜品列表
+    * */
+    List<Dish> list(Long categoryId);
+
 }

@@ -14,6 +14,9 @@ import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+
 /**
  * @BelongsProject: sky-take-out
  * @Author: 张宇若
@@ -71,6 +74,13 @@ public class DishController {
         dishDTO.setId(id);
         dishService.updateStatus(dishDTO);
         return Result.success();
+    }
+
+    @GetMapping("/list")
+    @ApiOperation("根据分类查询菜品")
+    public Result list(Long categoryId){
+        List<Dish> list=dishService.list(categoryId);
+        return Result.success(list);
     }
 
 

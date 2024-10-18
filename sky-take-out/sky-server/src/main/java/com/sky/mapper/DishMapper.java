@@ -46,4 +46,9 @@ public interface DishMapper {
 
     @AutoFill(OperationType.UPDATE)
     void update(Dish dish);
+
+    /*
+    * 根据dish中参数动态查询dishList
+    * */
+    List<Dish> list(Dish dish);
 }
