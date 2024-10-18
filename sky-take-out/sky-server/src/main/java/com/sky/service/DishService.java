@@ -33,4 +33,15 @@ public interface DishService {
     * 根据id查询菜品
     * */
     DishVO selectById(Long id);
+
+    /*
+    * 更新菜品信息
+    * */
+
+    void update(DishDTO dishDTO);
+
+    /*
+    * 更新起售或者停售
+    * */
+    void updateStatus(DishDTO dishDTO);
 }

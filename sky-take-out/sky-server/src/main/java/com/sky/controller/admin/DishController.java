@@ -58,4 +58,20 @@ public class DishController {
         return Result.success(dishVO);
     }
 
+    @PutMapping
+    @ApiOperation("修改菜品信息")
+    public Result update(@RequestBody DishDTO dishDTO){
+        dishService.update(dishDTO);
+        return Result.success();
+    }
+    @PostMapping("/status/{status}")
+    public Result modifyStatus(@PathVariable Integer status,Long id){
+        DishDTO dishDTO=new DishDTO();
+        dishDTO.setStatus(status);
+        dishDTO.setId(id);
+        dishService.updateStatus(dishDTO);
+        return Result.success();
+    }
+
+
 }
