@@ -48,4 +48,8 @@ public interface SetmealService {
     * */
     void modify(SetmealDTO setmealDTO);
 
+    /*
+    * 修改套餐状态
+    * */
+    void modifyStatus(Integer status,Long id);
 }

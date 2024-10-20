@@ -10,6 +10,7 @@ import com.sky.service.SetmealService;
 import com.sky.vo.SetmealVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -64,6 +65,12 @@ public class SetmealController {
     @ApiOperation("修改套餐")
     public Result modify(@RequestBody SetmealDTO setmealDTO){
         setmealService.modify(setmealDTO);
+        return Result.success();
+    }
+
+    @PostMapping("/status/{status}")
+    public Result modifyStatus(@PathVariable Integer status,Long id){
+        setmealService.modifyStatus(status,id);
         return Result.success();
     }
 
