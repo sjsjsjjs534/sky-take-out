@@ -51,4 +51,5 @@ public interface DishMapper {
     * 根据dish中参数动态查询dishList
     * */
     List<Dish> list(Dish dish);
+
 }

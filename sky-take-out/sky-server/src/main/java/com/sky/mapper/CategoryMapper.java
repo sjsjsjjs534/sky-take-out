@@ -53,6 +53,6 @@ public interface CategoryMapper {
     /*
     * 根据分类类别查询分类列表
     * */
-    @Select("select * from category where type=#{type}")
-    List<Category> getByType(Integer type);
+
+    List<Category> list(Integer type);
 }

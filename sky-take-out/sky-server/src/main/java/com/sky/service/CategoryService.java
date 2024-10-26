@@ -43,4 +43,7 @@ public interface CategoryService {
     * 根据分类类别查询类别列表
     * */
     List list(Integer type);
+
+
+
 }
