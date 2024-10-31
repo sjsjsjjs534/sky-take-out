@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -33,10 +34,9 @@ public interface ShoppingCartMapper {
     * */
     void insert(ShoppingCart shoppingCart);
 
-    /*
-    * 根据用户id删除其相关的所有购物车数据
-    * */
-    @Delete("delete from shopping_cart where user_id=#{userId}")
-    void deleteByUserId(Long currentId);
 
+    /*
+    * 删除满足条件的购物车数据
+    * */
+    void delete(ShoppingCart shoppingCart);
 }

@@ -56,4 +56,14 @@ public class ShoppingCartController {
         shoppingCartService.clean();
         return Result.success();
     }
+
+    /*
+    * 删除购物车中的一个商品（减少数量，数量为0则删除）
+    * */
+    @ApiOperation("删除购物车中的一个商品")
+    @PostMapping("/sub")
+    public Result sub(@RequestBody ShoppingCartDTO shoppingCartDTO){
+        shoppingCartService.sub(shoppingCartDTO);
+        return Result.success();
+    }
 }
