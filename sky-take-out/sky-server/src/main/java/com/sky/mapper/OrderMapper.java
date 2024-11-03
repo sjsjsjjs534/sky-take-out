@@ -1,8 +1,12 @@
 package com.sky.mapper;
 
+import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.entity.Orders;
+import com.sky.vo.OrderVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * @BelongsProject: sky-take-out
@@ -35,4 +39,5 @@ public interface OrderMapper {
     @Select("select * from orders where number = #{orderNumber} and user_id= #{userId}")
     Orders getByNumberAndUserId(String orderNumber, Long userId);
 
+    List<Orders> list(OrdersPageQueryDTO ordersPageQueryDTO);
 }
