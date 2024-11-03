@@ -54,4 +54,9 @@ public interface OrderService {
     * 再来一单
     * */
     void repeat(Long id);
+
+    /*
+    * 搜索订单（按条件搜索）
+    * */
+    PageResult search(OrdersPageQueryDTO ordersPageQueryDTO);
 }
