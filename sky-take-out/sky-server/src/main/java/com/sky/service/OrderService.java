@@ -43,4 +43,10 @@ public interface OrderService {
     * 根据订单编号查询订单详情
     * */
     OrderVO getDetailByOrderId(Long id);
+
+    /*
+    *
+    * 根据id取消订单
+    * */
+    void cancel(Long id);
 }
