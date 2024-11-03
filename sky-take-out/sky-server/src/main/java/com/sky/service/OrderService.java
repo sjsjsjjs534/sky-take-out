@@ -49,4 +49,9 @@ public interface OrderService {
     * 根据id取消订单
     * */
     void cancel(Long id);
+
+    /*
+    * 再来一单
+    * */
+    void repeat(Long id);
 }

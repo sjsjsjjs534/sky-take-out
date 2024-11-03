@@ -39,4 +39,9 @@ public interface ShoppingCartMapper {
     * 删除满足条件的购物车数据
     * */
     void delete(ShoppingCart shoppingCart);
+
+    /*
+    * 批量插入购物车数据
+    * */
+    void insertBatch(List<ShoppingCart> shoppingCartList);
 }
