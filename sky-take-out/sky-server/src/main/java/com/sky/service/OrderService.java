@@ -6,6 +6,7 @@ import com.sky.dto.OrdersSubmitDTO;
 import com.sky.result.PageResult;
 import com.sky.vo.OrderPaymentVO;
 import com.sky.vo.OrderSubmitVO;
+import com.sky.vo.OrderVO;
 
 /**
  * @BelongsProject: sky-take-out
@@ -38,4 +39,8 @@ public interface OrderService {
     * */
     PageResult history(OrdersPageQueryDTO ordersPageQueryDTO);
 
+    /*
+    * 根据订单编号查询订单详情
+    * */
+    OrderVO getDetailByOrderId(Long id);
 }
