@@ -52,3 +52,7 @@ sky:
   wechat:
     appid: ${sky.wechat.appid}
     secret: ${sky.wechat.secret}
+  shop:
+    address: 武汉市洪山区华中师范大学桂子山校区
+  baidu:
+    ak: 1RHEnT0VWYrrjxzGETB2VW7GDgI6bcDm
