@@ -3,6 +3,7 @@ package com.sky.mapper;
 import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.entity.Orders;
 import com.sky.vo.OrderVO;
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -54,4 +55,5 @@ public interface OrderMapper {
     @Select("select sum(amount) from orders where order_time > #{beginTime} and order_time < #{endTime} and status = #{status}")
     Double selectByTimeAndStatus(LocalDateTime beginTime, LocalDateTime endTime, Integer status);
 
+    Integer count(LocalDateTime beginTime, LocalDateTime endTime, Integer status);
 }

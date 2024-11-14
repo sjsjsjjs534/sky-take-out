@@ -5,6 +5,7 @@ import com.sky.mapper.EmployeeMapper;
 import com.sky.mapper.OrderMapper;
 import com.sky.mapper.UserMapper;
 import com.sky.service.ReportService;
+import com.sky.vo.OrderReportVO;
 import com.sky.vo.TurnoverReportVO;
 import com.sky.vo.UserReportVO;
 import io.swagger.models.auth.In;
@@ -96,6 +97,67 @@ public class ReportServiceImpl implements ReportService {
                 .dateList(StringUtils.join(dateList,","))
                 .totalUserList(StringUtils.join(totalUser,","))
                 .newUserList(StringUtils.join(newUser,","))
+                .build();
+    }
+
+    /*
+    * 订单统计
+    * */
+    @Override
+    public OrderReportVO ordersStatistics(LocalDate begin, LocalDate end) {
+        //先构造dateList
+        List<LocalDate> dateList=new ArrayList<>();
+        dateList.add(begin);
+        LocalDate fakeBegin=begin;
+        while (!begin.equals(end)){
+            begin=begin.plusDays(1);
+            dateList.add(begin);
+        }
+        //还原begin
+        begin=fakeBegin;
+
+        //构造订单数列表（每天的对应）orderCountList
+        List<Integer> orderCountList=new ArrayList<>();
+        for (LocalDate date:dateList){
+            LocalDateTime beginTime=LocalDateTime.of(date,LocalTime.MIN);
+            LocalDateTime endTime=LocalDateTime.of(date,LocalTime.MAX);
+            //select count(id) from orders where order_time>beginTime and order_time<endTime
+            Integer count = orderMapper.count(beginTime, endTime, null);
+            if (count==null){
+                count=0;
+            }
+            orderCountList.add(count);
+        }
+        //构造订单数列表（每天的对应）orderCountList
+        List<Integer> validOrderCountList=new ArrayList<>();
+        for (LocalDate date:dateList){
+            LocalDateTime beginTime=LocalDateTime.of(date,LocalTime.MIN);
+            LocalDateTime endTime=LocalDateTime.of(date,LocalTime.MAX);
+            //select count(id) from orders where order_time>beginTime and order_time<endTime
+            Integer count = orderMapper.count(beginTime, endTime, Orders.COMPLETED);
+            if (count==null){
+                count=0;
+            }
+            validOrderCountList.add(count);
+        }
+        //获取订单总数
+        int totalOrderCount=orderMapper.count(LocalDateTime.of(begin,LocalTime.MIN),LocalDateTime.of(end,LocalTime.MAX),null);
+        //获取有效订单总数
+        int validOrderCount=orderMapper.count(LocalDateTime.of(begin,LocalTime.MIN),LocalDateTime.of(end,LocalTime.MAX), Orders.COMPLETED);
+        //订单完成率
+        //当订单为0的时候完成率默认设置为100%
+        double orderCompletionRate=1.0;
+        if (totalOrderCount!=0){
+            orderCompletionRate=(double) validOrderCount/(double) totalOrderCount;
+        }
+
+        return OrderReportVO.builder()
+                .dateList(StringUtils.join(dateList,","))
+                .orderCompletionRate(orderCompletionRate)
+                .orderCountList(StringUtils.join(orderCountList,","))
+                .validOrderCountList(StringUtils.join(validOrderCountList,","))
+                .totalOrderCount(totalOrderCount)
+                .validOrderCount(validOrderCount)
                 .build();
     }
 }
