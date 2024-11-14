@@ -4,6 +4,8 @@ import com.sky.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.time.LocalDateTime;
+
 /**
  * @BelongsProject: sky-take-out
  * @Author: 张宇若
@@ -21,4 +23,10 @@ public interface UserMapper {
 
     @Select("select * from user where id=#{userId}")
     User getById(Long userId);
+
+    /*
+    * 根据最后时间查询客户总量
+    * */
+    @Select("select count(id) from user where create_time<#{endTime}")
+    int countUserNumByTime(LocalDateTime endTime);
 }

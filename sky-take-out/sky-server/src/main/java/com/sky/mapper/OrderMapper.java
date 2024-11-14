@@ -50,4 +50,8 @@ public interface OrderMapper {
 
     @Select("select * from orders where status=#{status} and order_time <#{time}")
     List<Orders> getByStatusAndOrderTimeLT(Integer status, LocalDateTime time);
+
+    @Select("select sum(amount) from orders where order_time > #{beginTime} and order_time < #{endTime} and status = #{status}")
+    Double selectByTimeAndStatus(LocalDateTime beginTime, LocalDateTime endTime, Integer status);
+
 }

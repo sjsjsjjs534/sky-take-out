@@ -34,10 +34,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -459,6 +456,28 @@ public class OrderServiceImpl implements OrderService {
         updateOrder.setId(id);
         updateOrder.setStatus(Orders.COMPLETED);
         orderMapper.update(updateOrder);
+    }
+
+    /*
+    * 用户催单
+    * */
+    @Override
+    public void reminder(Long id) {
+        //在数据库中确认订单存在
+        Orders orders = orderMapper.getById(id);
+        if (orders==null){
+            throw new OrderBusinessException(MessageConstant.ORDER_NOT_FOUND);
+        }
+
+        //订单存在，发送催单信息
+        //封装json数据
+        HashMap map=new HashMap<>();
+        map.put("type",2);
+        map.put("orderId",id);
+        map.put("content","订单号："+orders.getNumber());
+
+        //websocket发送json数据进行催单
+        webSocketServer.sendToAllClient(JSONObject.toJSONString(map));
     }
 
 
