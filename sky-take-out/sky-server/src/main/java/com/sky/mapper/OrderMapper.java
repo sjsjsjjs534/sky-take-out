@@ -1,5 +1,6 @@
 package com.sky.mapper;
 
+import com.sky.dto.GoodsSalesDTO;
 import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.entity.Orders;
 import com.sky.vo.OrderVO;
@@ -55,5 +56,13 @@ public interface OrderMapper {
     @Select("select sum(amount) from orders where order_time > #{beginTime} and order_time < #{endTime} and status = #{status}")
     Double selectByTimeAndStatus(LocalDateTime beginTime, LocalDateTime endTime, Integer status);
 
+    /*
+    * 统计指定时间段指定状态的订单数量
+    * */
     Integer count(LocalDateTime beginTime, LocalDateTime endTime, Integer status);
+
+    /*
+    * 统计销量排行前十的商品
+    * */
+    List<GoodsSalesDTO> getSalesTop10(LocalDateTime beginTime, LocalDateTime endTime);
 }
