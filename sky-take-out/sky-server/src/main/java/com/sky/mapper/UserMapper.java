@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 /**
  * @BelongsProject: sky-take-out
@@ -29,4 +30,9 @@ public interface UserMapper {
     * */
     @Select("select count(id) from user where create_time<#{endTime}")
     int countUserNumByTime(LocalDateTime endTime);
+
+    /*
+    * 根据动态条件统计用户数量
+    * */
+    Integer countByMap(Map map);
 }

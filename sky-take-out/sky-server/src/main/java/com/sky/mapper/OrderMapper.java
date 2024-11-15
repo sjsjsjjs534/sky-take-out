@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @BelongsProject: sky-take-out
@@ -65,4 +66,11 @@ public interface OrderMapper {
     * 统计销量排行前十的商品
     * */
     List<GoodsSalesDTO> getSalesTop10(LocalDateTime beginTime, LocalDateTime endTime);
+
+    Integer countByMap(Map map);
+
+    /*
+    * 根据动态条件统计营业额
+    * */
+    Double sumByMap(Map map);
 }
